@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Taniya</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1a0033, #330066, #660099);
+            color: white;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0,0,0,0.9);
+            padding: 15px 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff69b4;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(255,105,180,0.3);
+            color: #ff69b4;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(255,105,180,0.1), rgba(138,43,226,0.1));
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #ff69b4;
+            text-shadow: 0 0 20px rgba(255,105,180,0.5);
+            animation: pulse 2s infinite;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 600px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Sections */
+        .section {
+            padding: 80px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            min-height: 60vh;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #ff69b4;
+            text-shadow: 0 0 10px rgba(255,105,180,0.5);
+        }
+
+        .section-content {
+            text-align: center;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Art */
+        .art-image {
+            max-width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(255,105,180,0.3);
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .gallery-item {
+            border-radius: 15px;
+            overflow: hidden;
+            height: 200px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Button */
+        .surprise-btn {
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            font-size: 1.1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 25px;
+            box-shadow: 0 10px 25px rgba(255,105,180,0.4);
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .surprise-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255,105,180,0.6);
+        }
+
+        /* Popup */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 1.8rem;
+            border: 2px solid #ff69b4;
+            animation: popup 0.5s ease;
+        }
+
+        @keyframes popup {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(0,0,0,0.5);
+            font-size: 1.1rem;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: rgba(0,0,0,0.95);
+                flex-direction: column;
+                padding: 20px 0;
+                display: none;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .section h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Taniya ❤️</div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#memories" class="nav-link">Memories</a></li>
+                <li><a href="#art" class="nav-link">Art</a></li>
+                <li><a href="#gallery" class="nav-link">Gallery</a></li>
+                <li><a href="#surprise" class="nav-link">Surprise</a></li>
+            </ul>
+            <div class="hamburger" id="menuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home -->
+    <section id="home" class="hero">
+        <h1>Happy Birthday Taniya ❤️</h1>
+        <p>Happy Birthday Baby ❤️ You make my life happier just by being in it...</p>
+<p>I’m lucky to have you in my life ❤️</p>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section">
+        <h2>About You</h2>
+        <div class="section-content">
+            You are kind, caring, and understand even the smallest things.<br>
+            You love others more than yourself, and that makes you truly special.<br>
+            Since you came into my life, I feel happier.
+            You are not just special… you are important to me.<br>
+You make even normal days feel better.
+        </div>
+    </section>
+
+    <!-- Memories -->
+    <section id="memories" class="section">
+        <h2>Our Memories</h2>
+        <div class="section-content">
+            Our first meeting, our talks, and all those little moments…<br>
+            they mean everything to me ❤️
+        </div>
+    </section>
+
+    <!-- Art -->
+    <section id="art" class="section">
+        <h2>Your Art</h2>
+        <div class="section-content">
+            You have a beautiful creativity inside you.<br>
+            Never stop creating.
+        </div>
+        <img src="art.jpg" alt="Your Art" class="art-image">
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery" class="section">
+        <h2>Gallery</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="img1.jpg" alt="1"></div>
+            <div class="gallery-item"><img src="img2.jpg" alt="2"></div>
+            <div class="gallery-item"><img src="img3.jpg" alt="3"></div>
+            <div class="gallery-item"><img src="img4.jpg" alt="4"></div>
+            <div class="gallery-item"><img src="img5.jpg" alt="5"></div>
+            <div class="gallery-item"><img src="img6.jpg" alt="6"></div>
+        </div>
+    </section>
+
+    <!-- Surprise -->
+    <section id="surprise" class="section">
+        <h2>Special Surprise</h2>
+        <div class="section-content">
+            <button class="surprise-btn" onclick="showPopup()">Click for Surprise 🎁</button>
+        </div>
+    </section>
+
+    <!-- Popup -->
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            You deserve happiness, love, and everything you wish for ❤️
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        Made with ❤️ by your pyara Vinay baby
+    </footer>
+
+    <script>
+        // Mobile menu
+        document.getElementById('menuBtn').onclick = function() {
+            var menu = document.getElementById('navMenu');
+            if (menu.style.display === 'flex') {
+                menu.style.display = 'none';
+            } else {
+                menu.style.display = 'flex';
+            }
+        };
+
+        // Navbar links
+        var links = document.querySelectorAll('.nav-link');
+        links.forEach(function(link) {
+            link.onclick = function(e) {
+                e.preventDefault();
+                var target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({behavior: 'smooth'});
+                
+                // Remove active from all
+                links.forEach(function(l) {
+                    l.classList.remove('active');
+                });
+                // Add active to current
+                this.classList.add('active');
+                
+                // Close mobile menu
+                document.getElementById('navMenu').style.display = 'none';
+            };
+        });
+
+        // Popup function
+        function showPopup() {
+            document.getElementById('popup').style.display = 'flex';
+            setTimeout(function() {
+                document.getElementById('popup').style.display = 'none';
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
