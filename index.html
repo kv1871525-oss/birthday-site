@@ -256,6 +256,9 @@
     </style>
 </head>
 <body>
+  <audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
     <!-- Navbar -->
     <nav class="navbar">
         <div class="nav-container">
@@ -281,6 +284,16 @@
         <h1>Happy Birthday Taniya ❤️</h1>
         <p>Happy Birthday Baby ❤️ You make my life happier just by being in it...</p>
 <p>I’m lucky to have you in my life ❤️</p>
+<button onclick="playMusic()" style="
+padding:12px 20px;
+border:none;
+border-radius:20px;
+background:#ff4d6d;
+color:white;
+font-size:16px;
+margin-top:20px;">
+Tap for full experience 🎧
+</button>
     </section>
 
     <!-- About -->
@@ -348,6 +361,9 @@ You make even normal days feel better.
     </footer>
 
     <script>
+      function playMusic(){
+  document.getElementById("bgMusic").play();
+}
         // Mobile menu
         document.getElementById('menuBtn').onclick = function() {
             var menu = document.getElementById('navMenu');
